@@ -14,5 +14,6 @@ describe('Signup Controller', () => {
     }
     const httpRespnse = sut.handle(httpRequest)
     expect(httpRespnse.statusCode).toBe(400)
+    expect(httpRespnse.body).toEqual(new Error('Missing required parameters')) // toEqual verifica somente o valor, toBe verifica ponteiro tb
   })
 })

@@ -1,6 +1,12 @@
-export const roots = ['<rootDir>/src']
-export const collectCoverageFrom = ['<rootDir>/src/**/*.ts']
-export const coverageDirectory = 'coverage'
-export const coverageProvider = 'v8'
-export const testEnvironment = 'node'
-export const transform = { '.+\\.ts$': 'ts-jest' }
+module.exports = {
+  roots: ['<rootDir>/src'],
+
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'], // ira testar todo arquivo dentro de src e que seja .ts
+
+  coverageDirectory: 'coverage',
+  coverageProvider: 'v8',
+
+  testEnvironment: 'node',
+
+  transform: { '.+\\.ts$': 'ts-jest' },
+}

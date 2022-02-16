@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { SignupController } from './signup'
+import { MissingParamError } from '../missing-param-error'
 
 describe('Signup Controller', () => {
   test('Should return 400 if no name is provided', () => {
@@ -13,7 +14,7 @@ describe('Signup Controller', () => {
     }
     const httpRespnse = sut.handle(httpRequest)
     expect(httpRespnse.statusCode).toBe(400)
-    expect(httpRespnse.body).toEqual(new Error('Missing parameter name')) // toEqual verifica somente o valor, toBe verifica ponteiro tb
+    expect(httpRespnse.body).toEqual(new MissingParamError('name')) // toEqual verifica somente o valor, toBe verifica ponteiro tb
   })
 
   test('Should return 400 if no email is provided', () => {
@@ -27,6 +28,6 @@ describe('Signup Controller', () => {
     }
     const httpRespnse = sut.handle(httpRequest)
     expect(httpRespnse.statusCode).toBe(400)
-    expect(httpRespnse.body).toEqual(new Error('Missing parameter email'))
+    expect(httpRespnse.body).toEqual(new MissingParamError('email'))
   })
 })

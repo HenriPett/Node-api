@@ -8,13 +8,17 @@ interface SutTypes {
   emailValidatorStub: EmailValidator
 }
 
-const makeSut = (): SutTypes => {
+const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     isValid (email: string) :boolean {
       return true
     }
   }
-  const emailValidatorStub = new EmailValidatorStub()
+  return new EmailValidatorStub()
+}
+
+const makeSut = (): SutTypes => {
+  const emailValidatorStub = makeEmailValidator()
   const sut = new SignupController(emailValidatorStub)
   return {
     sut,
@@ -87,12 +91,27 @@ describe('Signup Controller', () => {
         name: 'name',
         email: 'invalid@mail.com',
         password: 'password',
-        passwordConfirmation: 'passwordConfirmation'
+        passwordConfirmation: 'password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
+  })
+
+  test('Should return 400 if provided password confirmation fails', () => {
+    const { sut } = makeSut() // sut is System under test
+    const httpRequest = {
+      body: {
+        name: 'name',
+        email: 'invalid@mail.com',
+        password: 'password',
+        passwordConfirmation: 'invalid'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
 
   test('Should call emailValidator with correct email', () => {
@@ -103,7 +122,7 @@ describe('Signup Controller', () => {
         name: 'name',
         email: 'any@mail.com',
         password: 'password',
-        passwordConfirmation: 'passwordConfirmation'
+        passwordConfirmation: 'password'
       }
     }
     sut.handle(httpRequest)
@@ -111,19 +130,16 @@ describe('Signup Controller', () => {
   })
 
   test('Should return 500 if EmailValidator throws an error', () => {
-    class EmailValidatorStub implements EmailValidator {
-      isValid (email: string) :boolean {
-        throw new Error()
-      }
-    }
-    const emailValidatorStub = new EmailValidatorStub()
-    const sut = new SignupController(emailValidatorStub)
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
     const httpRequest = {
       body: {
         name: 'name',
         email: 'any@mail.com',
         password: 'password',
-        passwordConfirmation: 'passwordConfirmation'
+        passwordConfirmation: 'password'
       }
     }
     const httpResponse = sut.handle(httpRequest)

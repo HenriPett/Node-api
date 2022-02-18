@@ -203,3 +203,23 @@ test('Should call AddAccount with correct params', () => {
     password: 'password'
   })
 })
+
+test('Should return 200 if valid params provided', () => {
+  const { sut } = makeSut() // sut is System under test
+  const httpRequest = {
+    body: {
+      name: 'name',
+      email: 'valid@mail.com',
+      password: 'password',
+      passwordConfirmation: 'password'
+    }
+  }
+  const httpResponse = sut.handle(httpRequest)
+  expect(httpResponse.statusCode).toBe(200)
+  expect(httpResponse.body).toEqual({
+    id: 'valid_id',
+    name: 'name',
+    email: 'email@mail.com',
+    password: 'password'
+  })
+})

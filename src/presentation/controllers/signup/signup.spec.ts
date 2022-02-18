@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { SignupController } from './signup'
-import { MissingParamError, InvalidParamError, ServerError } from '../..'
+import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 import { EmailValidator, AddAccount, AddAccountModel } from './signup-protocols'
 import { AccountModel } from '../../domain/models/account'
 

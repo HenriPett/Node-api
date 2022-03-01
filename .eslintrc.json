@@ -23,5 +23,6 @@
         "jest"
     ],
     "rules": {
-    }
+    },
+    "ignorePatterns": [".eslintrc.json"]
 }

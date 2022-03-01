@@ -3,8 +3,8 @@
         "outDir": "./dist",
         "module": "commonjs", //funcionalidade para gerar o codigo em js
         "target": "es2021", //qual versão queremos que seja gerado o javascript
-        "esMOduleInterop": true,
+        "esModuleInterop": true,
         "aloowJs": true,
-        "checkjs": true
+        "checkjs": true,
     }
 }

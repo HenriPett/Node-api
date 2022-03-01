@@ -1,10 +1,10 @@
 {
-    "conpilerOptions": {
+    "compilerOptions": {
         "outDir": "./dist",
         "module": "commonjs", //funcionalidade para gerar o codigo em js
         "target": "es2021", //qual versão queremos que seja gerado o javascript
         "esModuleInterop": true,
-        "aloowJs": true,
-        "checkjs": true,
+        "allowJs": true,
+        "checkJs": true,
     }
 }

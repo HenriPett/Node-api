@@ -6,7 +6,7 @@
 
 ## Init Docker MOngoDB commands
 
-`docker pull mongo\n`
-`docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=docker -e MONGO_INITDB_ROOT_PASSWORD=docker123 mongo`
-After this commands, your database is configured. If you want to run again your database, use:
-`docker start mongodb`
+`docker pull mongo`  
+`docker run --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=docker -e MONGO_INITDB_ROOT_PASSWORD=docker123 mongo`  
+After this commands, your database is configured. If you want to run again your database, use:  
+`docker start mongodb`  

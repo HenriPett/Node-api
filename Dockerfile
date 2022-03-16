@@ -1,8 +1,8 @@
-FROM node:16.14.x
+FROM node:16
 WORKDIR /usr/docker/clean-node-api
 
 COPY ./package.json .
-RUN npm install --only=prod
+RUN npm install
 
 COPY ./src ./src
 
